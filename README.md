@@ -1,6 +1,7 @@
-# Blue Archive Leaderboard
+# Blue Archive Raid Leaderboard
 
 ![Rank1030](screenshots/1030.jpg)
+![Result1030](screenshots/1030_2.jpg)
 
 **How?**
 Use a script to automatically scroll the leaderboard on an android emulator and take screenshots of the score. Then use OCR to extract relevant information from them.
