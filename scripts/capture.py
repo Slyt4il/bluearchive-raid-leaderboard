@@ -14,13 +14,13 @@ relative_end_x = 740 #1170
 relative_end_y = 450
 
 # Save folder
-save_folder = "raw_data\S44_Hieronymus_Urban"
+save_folder = "raw_data\S45_Binah_Outdoors_ASIA"
 
 # Number of screenshots to take
-num_screenshots = 1
+num_screenshots = 3200
 
 # Start index for filename
-offset = 10000
+offset = 6800
 
 # Delay between each action (in seconds)
 delay = 0.1
@@ -50,18 +50,18 @@ for i in range(num_screenshots):
     anchor_x = window_x + relative_anchor_x
     anchor_y = window_y + relative_anchor_y
     target_y = start_y - 51
-    # Check if undershooting
-    if not pyautogui.pixel(anchor_x, anchor_y) == anchor_pixel:
-        print(f"Undershooting at {offset+i}. Correcting by {correction_deg}px".ljust(50), end='\r')
-        correction_deg = correction_deg + 1 if correction_dir == -1 else 1
-        correction_dir = -1
-        correction_deg = max(min(correction_deg, 3), -3)
     # Check if overshooting
-    elif pyautogui.pixel(anchor_x, anchor_y - 1) == anchor_pixel:
+    if pyautogui.pixel(anchor_x, anchor_y - 1) == anchor_pixel:
         print(f"Overshooting at {offset+i}. Correcting by {correction_deg}px".ljust(50), end='\r')
         correction_deg = correction_deg + 1 if correction_dir == 1 else 1
         correction_dir = 1
-        correction_deg = max(min(correction_deg, 3), -3)
+        correction_deg = max(min(correction_deg, 5), -3)
+    # Check if undershooting
+    elif not pyautogui.pixel(anchor_x, anchor_y) == anchor_pixel:
+        print(f"Undershooting at {offset+i}. Correcting by {correction_deg}px".ljust(50), end='\r')
+        correction_deg = correction_deg + 1 if correction_dir == -1 else 1
+        correction_dir = -1
+        correction_deg = max(min(correction_deg, 5), -3)
     else:
         correction_deg = 1
         correction_dir = 0
