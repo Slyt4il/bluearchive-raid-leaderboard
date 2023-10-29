@@ -14,16 +14,16 @@ relative_end_x = 740 #1170
 relative_end_y = 450
 
 # Save folder
-save_folder = "raw_data\S45_Binah_Outdoors_ASIA"
+save_folder = "raw_data\S47_Chesed_Indoor_ASIA"
 
 # Number of screenshots to take
-num_screenshots = 3200
+num_screenshots = 10000
 
 # Start index for filename
-offset = 6800
+offset = 1
 
 # Delay between each action (in seconds)
-delay = 0.1
+delay = 0.15
 
 print("To exit, slam your mouse to the corner of the screen and trigger PyAutoGUI failsafe :)")
 for i in range(3):
@@ -55,13 +55,13 @@ for i in range(num_screenshots):
         print(f"Overshooting at {offset+i}. Correcting by {correction_deg}px".ljust(50), end='\r')
         correction_deg = correction_deg + 1 if correction_dir == 1 else 1
         correction_dir = 1
-        correction_deg = max(min(correction_deg, 5), -3)
+        correction_deg = max(min(correction_deg, 3), -3)
     # Check if undershooting
     elif not pyautogui.pixel(anchor_x, anchor_y) == anchor_pixel:
         print(f"Undershooting at {offset+i}. Correcting by {correction_deg}px".ljust(50), end='\r')
         correction_deg = correction_deg + 1 if correction_dir == -1 else 1
         correction_dir = -1
-        correction_deg = max(min(correction_deg, 5), -3)
+        correction_deg = max(min(correction_deg, 3), -3)
     else:
         correction_deg = 1
         correction_dir = 0
