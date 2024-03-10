@@ -3,7 +3,7 @@ import os
 import re
 import cv2
 
-raw_data_dir = "raw_data\S44_Hieronymus_Urban"
+raw_data_dir = "raw_data\S53_Goz_Outdoor_ASIA"
 file_set = set()
 
 reader = easyocr.Reader(['en'])
@@ -68,13 +68,13 @@ for file in file_set:
     count += 1
     print(f"File {count}/{len(file_set)}".ljust(50), end='\r')
     im = cv2.imread(os.path.join(raw_data_dir, file))
-    name_roi = im[85:118, 0:226]
+    name_roi = im[95:125, 60:270]
     rank, difficulty, score, name, level = extract_info(im, name_roi)
     extracted_data.append([rank, difficulty, score, name, level])
 
 extracted_data = sorted(extracted_data, key=lambda x: int(x[0]))
 
-with open("S44_Hieronymus_Urban_ASIA_TOP10000.csv", "w", encoding='utf-8') as csv_file:
+with open("S53_Goz_Outdoor_ASIA_TEST.csv", "w", encoding='utf-8') as csv_file:
     csv_file.write("Rank,Difficulty,Score,Name,Level\n")
     for line in extracted_data:
         rank = line[0]
@@ -82,7 +82,7 @@ with open("S44_Hieronymus_Urban_ASIA_TOP10000.csv", "w", encoding='utf-8') as cs
         score = line[2]
         name = line[3]
         level = line[4]
-        
+
         csv_file.write(f"{rank},{difficulty},{score},{name},{level}\n")
 
 print("CSV file has been created.")
